@@ -250,7 +250,7 @@
     <dependency>
       <groupId>com.github.mcollovati.vertx</groupId>
       <artifactId>vertx-vaadin-flow</artifactId>
-      <version>15.0.0</version>
+      <version>17.0.0</version>
     </dependency>
     <dependency>
       <groupId>com.vaadin</groupId>
