@@ -118,18 +118,6 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-openapi</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-htdigest</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-service-discovery</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-micrometer-metrics</artifactId>
     </dependency>
     <dependency>
@@ -138,23 +126,11 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-api-contract</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-oauth2</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-reactive-streams</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-config</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-htpasswd</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -175,10 +151,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-rabbitmq-client</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mongo-client</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-codec</groupId>
@@ -234,11 +206,6 @@
     </dependency>
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
-      <artifactId>oak-store-document</artifactId>
-      <version>1.34.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.jackrabbit</groupId>
       <artifactId>oak-blob-plugins</artifactId>
       <version>1.34.0</version>
     </dependency>
@@ -264,18 +231,14 @@
     </dependency>
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
-      <artifactId>oak-segment-aws</artifactId>
-      <version>1.34.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.jackrabbit</groupId>
-      <artifactId>oak-auth-ldap</artifactId>
-      <version>1.34.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.jackrabbit</groupId>
       <artifactId>oak-search-mt</artifactId>
       <version>1.34.0</version>
+      <exclusions>
+      	<exclusion>
+      		<groupId>org.slf4j</groupId>
+      		<artifactId>slf4j-log4j12</artifactId>
+      	</exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>javax.jcr</groupId>
@@ -283,7 +246,7 @@
       <version>2.0</version>
     </dependency>
 
-    <!-- vaadin flow -->
+    <!-- Vaadin flow -->
     <dependency>
       <groupId>com.github.mcollovati.vertx</groupId>
       <artifactId>vertx-vaadin-flow</artifactId>
@@ -315,6 +278,69 @@
       <version>4.0.2</version>
       <scope>runtime</scope>
     </dependency>
+    
+    <!-- Network -->
+	<dependency>
+	  <groupId>commons-net</groupId>
+	  <artifactId>commons-net</artifactId>
+	  <version>3.7</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.apache.sshd</groupId>
+	  <artifactId>sshd-core</artifactId>
+	  <version>2.5.1</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.apache.sshd</groupId>
+	  <artifactId>sshd-sftp</artifactId>
+	  <version>2.5.1</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.apache.sshd</groupId>
+	  <artifactId>sshd-scp</artifactId>
+	  <version>2.5.1</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.apache.sshd</groupId>
+	  <artifactId>sshd-netty</artifactId>
+	  <version>2.5.1</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.apache.sshd</groupId>
+	  <artifactId>sshd-git</artifactId>
+	  <version>2.5.1</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.apache.sshd</groupId>
+	  <artifactId>sshd-contrib</artifactId>
+	  <version>2.5.1</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.apache.sshd</groupId>
+	  <artifactId>sshd-putty</artifactId>
+	  <version>2.5.1</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.apache.sshd</groupId>
+	  <artifactId>sshd-openpgp</artifactId>
+	  <version>2.5.1</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.apache.sshd</groupId>
+	  <artifactId>sshd-ldap</artifactId>
+	  <version>2.5.1</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.cryptomator</groupId>
+	  <artifactId>cryptofs</artifactId>
+	  <version>1.9.12</version>
+	</dependency>
+	<dependency>
+	  <groupId>com.azure</groupId>
+	  <artifactId>azure-storage-blob-nio</artifactId>
+	  <version>12.0.0-beta.2</version>
+	</dependency>
+
 
     <!-- Utilities -->
     <dependency>
@@ -331,17 +357,6 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.12</version>
-    </dependency>
-    <dependency>
-      <groupId>org.joda</groupId>
-      <artifactId>joda-collect</artifactId>
-      <version>1.0.1</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>guava</artifactId>
-          <groupId>com.google.guava</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.google.auto.service</groupId>
@@ -385,17 +400,17 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
-      <version>${jackson.version}</version>
+      <version>${jackson.version}</version><!--$NO-MVN-MAN-VER$-->
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
-      <version>${jackson.version}</version>
+      <version>${jackson.version}</version><!--$NO-MVN-MAN-VER$-->
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>${jackson.version}</version>
+      <version>${jackson.version}</version><!--$NO-MVN-MAN-VER$-->
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -436,7 +451,7 @@
     <dependency>
       <groupId>com.fasterxml.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-yaml</artifactId>
-      <version>${jackson.version}</version>
+      <version>${jackson.version}</version><!--$NO-MVN-MAN-VER$-->
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.dataformat</groupId>

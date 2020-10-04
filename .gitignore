@@ -626,3 +626,6 @@ gradle-app.setting
 **/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/maven,compressedarchive,windows,macos,linux,eclipse,node,yarn,visualstudiocode,netbeans,intellij+all,vim,emacs,svn,cvs,mercurial,gradle
+/.apt_generated_tests/
+.classpath
+.project
