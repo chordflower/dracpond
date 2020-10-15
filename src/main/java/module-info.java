@@ -21,9 +21,25 @@
 
 module cc.chordflower.dracpond {
   requires org.slf4j;
-  requires com.google.common;
+  requires transitive com.google.common;
   requires io.vavr;
   requires io.vertx.core;
+  requires transitive io.vertx.config;
+  requires io.vertx.config.yaml;
+  requires deltaspike.cdictrl.api;
+  requires deltaspike.core.api;
+  requires javax.interceptor.api;
+  requires javax.inject;
+  requires cdi.api;
+  requires jakarta.validation;
+  requires com.fasterxml.jackson.annotation;
+  requires com.fasterxml.jackson.core;
+  requires com.fasterxml.jackson.databind;
+  requires com.fasterxml.jackson.datatype.guava;
+  requires com.fasterxml.jackson.datatype.jdk8;
+  requires com.fasterxml.jackson.datatype.jsr310;
+  requires lombok;
+  requires jcommander;
 
   exports cc.chordflower.dracpond;
 }

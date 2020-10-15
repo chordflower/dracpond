@@ -1,31 +1,61 @@
 = Dracpond
 
-image:https://img.shields.io/badge/vert.x-4.0.0-SNAPSHOT-purple.svg[link="https://vertx.io"]
+https://www.codefactor.io/repository/github/chordflower/dracpond[image:https://www.codefactor.io/repository/github/chordflower/dracpond/badge[CodeFactor]]
 
-This application was generated using http://start.vertx.io
+This is a repository manager/proxy for several services:
 
-== Building
+* Maven and friends;
+* Npm;
+* Rust crates;
+* Ruby gems;
+* Python wheels (pip and friends);
+* Golang packages;
+* Dart packages (pub);
+
+It is not an objective of dracpond to be a repository for:
+
+* Operating system pakages, this includes:
+** Debian packages (apk);
+** RedHat RPM's;
+** Homebrew bottles;
+** etc;
+* Git Large File System blobs;
+
+Instead it will focus on programming related packages, like the one described first.
+
+== Coding
+
+Dracpond is written in Java, and uses:
+
+* VertX and friends as a base framework, specifically:
+** VertX web for responding to requests;
+** VertX config for parsing the configuration file;
+** VertX JWT and Ldap auth for authentication (if needed);
+** VertX Consul for discovery services;
+** VertX RabbitMQ for integration with rabbitMQ queues;
+** VertX micrometer for monitoring with JMX and prometheus;
+* Jackrabbit oak and friends for storing artifacts;
+* ArangoDB for database persistence of users, configurations, etc.
+* Vaadin for creating the web interface;
+* Various NIO.2 filesystem implementations for comunicating with FTP's, creating cyphered archives;
+* Maven as it's build system.
+
+=== Building
 
 To launch your tests:
+
 ```
 ./mvnw clean test
 ```
 
 To package your application:
+
 ```
 ./mvnw clean package
 ```
 
 To run your application:
+
 ```
 ./mvnw clean compile exec:java
 ```
-
-== Help
-
-* https://vertx.io/docs/[Vert.x Documentation]
-* https://stackoverflow.com/questions/tagged/vert.x?sort=newest&pageSize=15[Vert.x Stack Overflow]
-* https://groups.google.com/forum/?fromgroups#!forum/vertx[Vert.x User Group]
-* https://gitter.im/eclipse-vertx/vertx-users[Vert.x Gitter]
-
-

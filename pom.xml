@@ -56,14 +56,24 @@
     <maven.compiler.target>14</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.debug>false</maven.compiler.debug>
+    <maven.compiler.parameters>true</maven.compiler.parameters>
+    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+    <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+    <maven.compiler.useIncrementalCompilation>true</maven.compiler.useIncrementalCompilation>
+    <maven.clean.retryOnError>true</maven.clean.retryOnError>
+    <maven.clean.followSymLinks>true</maven.clean.followSymLinks>
+
+    <!-- Versions -->
     <maven-shade-plugin.version>2.4.3</maven-shade-plugin.version>
     <exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
     <vertx.version>4.0.0-SNAPSHOT</vertx.version>
     <junit-jupiter.version>5.7.0</junit-jupiter.version>
-    <main.verticle>cc.chordflower.dracpond.MainVerticle</main.verticle>
     <jackson.version>2.11.2</jackson.version>
     <log4j.version>2.0.0-alpha1</log4j.version>
     <logback.version>1.3.0-alpha5</logback.version>
+    <deltaspike.version>1.9.4</deltaspike.version>
+    <owb.version>2.0.18</owb.version>
   </properties>
 
   <dependencyManagement>
@@ -131,6 +141,10 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-config</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-config-yaml</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -234,10 +248,10 @@
       <artifactId>oak-search-mt</artifactId>
       <version>1.34.0</version>
       <exclusions>
-      	<exclusion>
-      		<groupId>org.slf4j</groupId>
-      		<artifactId>slf4j-log4j12</artifactId>
-      	</exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -278,69 +292,68 @@
       <version>4.0.4</version>
       <scope>runtime</scope>
     </dependency>
-    
-    <!-- Network -->
-	<dependency>
-	  <groupId>commons-net</groupId>
-	  <artifactId>commons-net</artifactId>
-	  <version>3.7</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.apache.sshd</groupId>
-	  <artifactId>sshd-core</artifactId>
-	  <version>2.5.1</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.apache.sshd</groupId>
-	  <artifactId>sshd-sftp</artifactId>
-	  <version>2.5.1</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.apache.sshd</groupId>
-	  <artifactId>sshd-scp</artifactId>
-	  <version>2.5.1</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.apache.sshd</groupId>
-	  <artifactId>sshd-netty</artifactId>
-	  <version>2.5.1</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.apache.sshd</groupId>
-	  <artifactId>sshd-git</artifactId>
-	  <version>2.5.1</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.apache.sshd</groupId>
-	  <artifactId>sshd-contrib</artifactId>
-	  <version>2.5.1</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.apache.sshd</groupId>
-	  <artifactId>sshd-putty</artifactId>
-	  <version>2.5.1</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.apache.sshd</groupId>
-	  <artifactId>sshd-openpgp</artifactId>
-	  <version>2.5.1</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.apache.sshd</groupId>
-	  <artifactId>sshd-ldap</artifactId>
-	  <version>2.5.1</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.cryptomator</groupId>
-	  <artifactId>cryptofs</artifactId>
-	  <version>1.9.12</version>
-	</dependency>
-	<dependency>
-	  <groupId>com.azure</groupId>
-	  <artifactId>azure-storage-blob-nio</artifactId>
-	  <version>12.0.0-beta.2</version>
-	</dependency>
 
+    <!-- Network -->
+    <dependency>
+      <groupId>commons-net</groupId>
+      <artifactId>commons-net</artifactId>
+      <version>3.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sshd</groupId>
+      <artifactId>sshd-core</artifactId>
+      <version>2.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sshd</groupId>
+      <artifactId>sshd-sftp</artifactId>
+      <version>2.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sshd</groupId>
+      <artifactId>sshd-scp</artifactId>
+      <version>2.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sshd</groupId>
+      <artifactId>sshd-netty</artifactId>
+      <version>2.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sshd</groupId>
+      <artifactId>sshd-git</artifactId>
+      <version>2.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sshd</groupId>
+      <artifactId>sshd-contrib</artifactId>
+      <version>2.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sshd</groupId>
+      <artifactId>sshd-putty</artifactId>
+      <version>2.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sshd</groupId>
+      <artifactId>sshd-openpgp</artifactId>
+      <version>2.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sshd</groupId>
+      <artifactId>sshd-ldap</artifactId>
+      <version>2.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.cryptomator</groupId>
+      <artifactId>cryptofs</artifactId>
+      <version>1.9.12</version>
+    </dependency>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-storage-blob-nio</artifactId>
+      <version>12.0.0-beta.2</version>
+    </dependency>
 
     <!-- Utilities -->
     <dependency>
@@ -378,6 +391,11 @@
       <artifactId>guava</artifactId>
       <version>29.0-jre</version>
     </dependency>
+    <dependency>
+      <groupId>com.beust</groupId>
+      <artifactId>jcommander</artifactId>
+      <version>1.78</version>
+    </dependency>
 
     <!-- Annotations -->
     <dependency>
@@ -386,14 +404,87 @@
       <version>20.1.0</version>
     </dependency>
     <dependency>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+      <version>3.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
+      <version>7.0.0.Alpha6</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator-cdi</artifactId>
       <version>7.0.0.Alpha6</version>
     </dependency>
     <dependency>
       <groupId>org.glassfish</groupId>
       <artifactId>javax.el</artifactId>
       <version>3.0.1-b11</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- Dependency injection -->
+    <dependency>
+      <groupId>org.apache.deltaspike.core</groupId>
+      <artifactId>deltaspike-core-api</artifactId>
+      <version>${deltaspike.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.deltaspike.core</groupId>
+      <artifactId>deltaspike-core-impl</artifactId>
+      <version>${deltaspike.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.deltaspike.cdictrl</groupId>
+      <artifactId>deltaspike-cdictrl-api</artifactId>
+      <version>${deltaspike.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.openwebbeans</groupId>
+      <artifactId>openwebbeans-impl</artifactId>
+      <version>${owb.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.openwebbeans</groupId>
+      <artifactId>openwebbeans-spi</artifactId>
+      <version>${owb.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.deltaspike.cdictrl</groupId>
+      <artifactId>deltaspike-cdictrl-owb</artifactId>
+      <version>${deltaspike.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.enterprise</groupId>
+      <artifactId>cdi-api</artifactId>
+      <version>2.0.SP1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.deltaspike.modules</groupId>
+      <artifactId>deltaspike-scheduler-module-api</artifactId>
+      <version>${deltaspike.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.deltaspike.modules</groupId>
+      <artifactId>deltaspike-scheduler-module-impl</artifactId>
+      <version>${deltaspike.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz</artifactId>
+      <version>2.3.0</version>
     </dependency>
 
     <!-- Jackson -->
@@ -545,37 +636,13 @@
               <artifactId>auto-service</artifactId>
               <version>1.0-rc7</version>
             </path>
+            <path>
+              <groupId>org.hibernate.validator</groupId>
+              <artifactId>hibernate-validator-annotation-processor</artifactId>
+              <version>7.0.0.Alpha6</version>
+            </path>
           </annotationProcessorPaths>
         </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.4</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <transformers>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <manifestEntries>
-                    <Main-Class>io.vertx.core.Launcher</Main-Class>
-                    <Main-Verticle>${main.verticle}</Main-Verticle>
-                  </manifestEntries>
-                </transformer>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                  <resource>META-INF/services/io.vertx.core.spi.VerticleFactory</resource>
-                </transformer>
-              </transformers>
-              <artifactSet>
-              </artifactSet>
-              <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-app.jar
-              </outputFile>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -631,11 +698,44 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
         <version>3.9.1</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctor-maven-plugin</artifactId>
+            <version>2.1.0</version>
+          </dependency>
+          <dependency>
+            <groupId>com.puravida.asciidoctor</groupId>
+            <artifactId>asciidoctor-themes</artifactId>
+            <version>2.1.0</version>
+          </dependency>
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj-diagram</artifactId>
+            <version>2.0.5</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <asciidoc>
+            <attributes>
+              <icons>font</icons>
+              <source-highlighter>highlightjs</source-highlighter>
+              <highlightjs-theme>kimbie.light</highlightjs-theme>
+              <toclevels>6</toclevels>
+              <outdir>${basedir}/target/site</outdir>
+            </attributes>
+            <requires>
+              <require>asciidoctor-diagram</require>
+            </requires>
+          </asciidoc>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <version>3.2.1</version>
+        <configuration>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -688,18 +788,6 @@
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.0.0</version>
-        <configuration>
-          <mainClass>io.vertx.core.Launcher</mainClass>
-          <arguments>
-            <argument>run</argument>
-            <argument>${main.verticle}</argument>
-          </arguments>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
         <artifactId>flatten-maven-plugin</artifactId>
         <version>1.2.5</version>
         <configuration>
@@ -747,7 +835,26 @@
             <enabled>false</enabled>
         </snapshots>
     </repository>
+    <repository>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>bintray-puravida-software-repo</id>
+      <name>bintray</name>
+      <url>https://dl.bintray.com/puravida-software/repo</url>
+    </repository>
   </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>bintray-puravida-software-repo</id>
+      <name>bintray-plugins</name>
+      <url>https://dl.bintray.com/puravida-software/repo</url>
+    </pluginRepository>
+  </pluginRepositories>
 
   <reporting>
     <plugins>
@@ -860,4 +967,51 @@
       </plugin>
     </plugins>
   </reporting>
+
+  <profiles>
+    <profile>
+      <id>generate-config-model</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jsonschema2pojo</groupId>
+            <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+            <version>1.0.2</version>
+            <configuration>
+              <sourceDirectory>${basedir}/src/main/resources/schema</sourceDirectory>
+              <targetPackage>cc.chordflower.dracpond.application.config.base</targetPackage>
+              <classNamePrefix>Base</classNamePrefix>
+              <constructorsRequiredPropertiesOnly>true</constructorsRequiredPropertiesOnly>
+              <includeConstructors>true</includeConstructors>
+              <annotationStyle>jackson2</annotationStyle>
+              <generateBuilders>true</generateBuilders>
+              <includeGetters>true</includeGetters>
+              <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
+              <includeJsr303Annotations>true</includeJsr303Annotations>
+              <includeSetters>true</includeSetters>
+              <includeToString>true</includeToString>
+              <initializeCollections>true</initializeCollections>
+              <outputDirectory>${basedir}/src/main/java</outputDirectory>
+              <outputEncoding>UTF-8</outputEncoding>
+              <targetVersion>15</targetVersion>
+              <serializable>true</serializable>
+              <useBigDecimals>true</useBigDecimals>
+              <useBigIntegers>true</useBigIntegers>
+              <useInnerClassBuilders>true</useInnerClassBuilders>
+              <useLongIntegers>true</useLongIntegers>
+              <useOptionalForGetters>true</useOptionalForGetters>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

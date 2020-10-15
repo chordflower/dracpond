@@ -1,0 +1,393 @@
+/*-
+ * #%L
+ * dracpond
+ * %%
+ * Copyright (C) 2020 carddamom
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * #L%
+ */
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "Schema for the configuration file",
+  "type":"object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "description": "the configuration schema always a reference to this document",
+      "type":"string"
+    },
+    "server": {
+      "description": "Server related properties",
+      "type":"object",
+      "additionalProperties": false,
+      "properties": {
+        "address": {
+          "description": "The address the server should listen to it must be an ip address",
+          "default": "127.0.0.1",
+          "type":"string"
+        },
+        "port": {
+          "description": "The port the server should listen to (default is a random available port)",
+          "type":"number",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "background": {
+          "description": "True if the server should be a daemon",
+          "type":"boolean",
+          "default": true
+        },
+        "certificate": {
+          "description": "The certificate (public key) to use by the server (activates tls)",
+          "type":"string"
+        },
+        "key": {
+          "description": "The private key to use by the server",
+          "type":"string"
+        },
+        "logToFile": {
+          "type":"boolean",
+          "description": "Enable logging to a file",
+          "default": true
+        },
+        "session": {
+          "description": "Configuration related to the session",
+          "type":"object",
+          "additionalProperties": false,
+          "properties": {
+            "key": {
+              "type":"string",
+              "description": "The name of the session id in storage",
+              "default": "KSESSION"
+            },
+            "maxAge": {
+              "type":"integer",
+              "description": "The number of seconds that the session is active.",
+              "default":"1800"
+            }
+          }
+        },
+        "limits": {
+          "description": "Several server limit configurations",
+          "type":"object",
+          "additionalProperties": false,
+          "properties": {
+            "timeBetweenRequests": {
+              "type":"integer",
+              "description": "Minimum time between consecutive requests by the same browser (in miliseconds)",
+              "default": "10000"
+            },
+            "maximumRequestSize": {
+              "type":"integer",
+              "description": "Maximum size of a request body (in bytes)",
+              "default": "52428800"
+            },
+            "fieldNameSize": {
+              "type":"integer",
+              "description": "Max multipart field name size (in bytes)",
+              "default": "100"
+            },
+            "fieldSize": {
+              "description": "Max multipart field value size (in bytes)",
+              "type":"integer",
+              "default": "1048576"
+            },
+            "fileSize": {
+              "description": "The max file size (in bytes)",
+              "type":"integer",
+              "default":"20971520"
+            }
+          }
+        }
+      },
+      "dependencies": {
+        "certificate": { "required": ["key"] },
+        "key": { "required": ["certificate"] }
+      }
+    },
+    "loggly": {
+      "description": "Definitions related to the loggly log server",
+      "type":"object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type":"boolean",
+          "description": "If the loggly logger is enabled",
+          "default":"false"
+        },
+        "subdomain": {
+          "type":"string",
+          "description": "The subdomain of your Loggly account"
+        },
+        "token": {
+          "type":"string",
+          "description": "The access token"
+        },
+        "username": {
+          "type":"string",
+          "description": "The authentication information for your Loggly account (username)"
+        },
+        "password": {
+          "type": "string",
+          "description": "The authentication information for your Loggly account (password)"
+        }
+      },
+      "dependencies": {
+        "enabled": {
+          "required": ["subdomain","token"]
+        },
+        "username": {
+          "required": ["password"]
+        },
+        "password": {
+          "required": ["username"]
+        }
+      }
+    },
+    "database": {
+      "description": "Definitions related to the arango database",
+      "type":"object",
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "description": "The arangodb host",
+          "type":"string",
+          "default":"127.0.0.1"
+        },
+        "port": {
+          "description": "The arangodb server port",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 8529
+        },
+        "secure": {
+          "description": "Enable tls connection",
+          "type":"boolean",
+          "default": false
+        },
+        "username": {
+          "description": "The username to login to the arangodb server",
+          "type":"string"
+        },
+        "password": {
+          "description": "The password of the given username",
+          "type":"string"
+        }
+      }
+    },
+    "proxy": {
+      "description": "The proxy to use for remote connections",
+      "type":"array",
+      "additionalItems": false,
+      "items": {
+        "description": "The definition of a single proxy",
+        "type":"object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": {
+            "description": "If the proxy is enabled",
+            "type":"boolean",
+            "default":true
+          },
+          "type": {
+            "description": "The protocol to use this proxy for",
+            "type":"string",
+            "enum": ["http","https","ftp","ftps"]
+          },
+          "host": {
+            "description": "The host of this proxy (Include schema)",
+            "type":"string"
+          },
+          "port": {
+            "description": "The proxy port",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535,
+            "default": 8500
+          },
+          "username": {
+            "description": "The username to connect to this proxy",
+            "type":"string"
+          },
+          "password": {
+            "description": "The password of the user",
+            "type":"string"
+          },
+          "except": {
+            "description": "List of domain exceptions that do not pass into this proxy",
+            "type":"array",
+            "additionalItems": false,
+            "items": {
+              "description": "A domain exception",
+              "type":"string"
+            }
+          }
+        }
+      }
+    },
+    "discovery": {
+      "description": "Definitions related to the registration in a consul server",
+      "type":"object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "description": "Enable the consul registration",
+          "type":"boolean",
+          "default":false
+        },
+        "host": {
+          "description": "The location of the consul server",
+          "type":"string",
+          "default":"127.0.0.1"
+        },
+        "port": {
+          "description": "The consul server port",
+          "type":"integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 8500
+        },
+        "secure": {
+          "description": "If a secure connection is needed",
+          "type":"boolean",
+          "default":false
+        },
+        "datacenter": {
+          "description": "The datacenter to use (defaults to local for agent)",
+          "type":"string"
+        },
+        "token": {
+          "description": "The token to use (defaults to none)",
+          "type":"string"
+        },
+        "ca": {
+          "description": "The certificates to use in pem format (defaults to none)",
+          "type":"array",
+          "additionalItems": false,
+          "items": {
+            "type":"string"
+          }
+        }
+      }
+    },
+    "redis": {
+      "description": "Definitions related to the redis server used for cache",
+      "type":"object",
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "description": "The redis server location",
+          "type": "string",
+          "default": "127.0.0.1"
+        },
+        "port": {
+          "description": "The redis server port",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 6379
+        },
+        "password": {
+          "description": "The redis username password",
+          "type": "string"
+        },
+        "certificate": {
+          "description": "The certificate (public key) to use for tls connection (activates tls)",
+          "type": "string"
+        },
+        "key": {
+          "description": "The private key to use by the tls connection",
+          "type": "string"
+        }
+      },
+      "dependencies": {
+        "certificate": {
+          "required": ["key"]
+        },
+        "key": {
+          "required": ["certificate"]
+        }
+      }
+    },
+    "management": {
+      "description": "Describes the management configuration used to control the server",
+      "type":"object",
+      "additionalProperties": false,
+      "properties": {
+        "address": {
+          "description": "The address the management server should listen to it must be an ip address",
+          "default": "127.0.0.1",
+          "type":"string"
+        },
+        "port": {
+          "description": "The port the management server should listen to (default is a random available port)",
+          "type":"number",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "username": {
+          "description": "The management server username",
+          "type":"string",
+          "default":"admin"
+        },
+        "password": {
+          "description": "The management server username password",
+          "type":"string",
+          "default":"admin123"
+        }
+      }
+    },
+    "mail": {
+      "description": "Information about the smtp server to use",
+      "type":"object",
+      "additionalProperties": false,
+      "properties": {
+        "address": {
+          "description": "The smtp server address",
+          "default": "127.0.0.1",
+          "type":"string"
+        },
+        "port": {
+          "description": "The port the smtp server",
+          "type":"number",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 654
+        },
+        "username": {
+          "description": "The smtp server username",
+          "type":"string"
+        },
+        "password": {
+          "description": "The smtp server username password",
+          "type":"string"
+        },
+        "secure": {
+          "description": "If a secure connection should be made",
+          "type":"boolean",
+          "default":false
+        },
+        "from": {
+          "description": "The email address that we should sent emails from",
+          "type":"string",
+          "default":"admin@example.com",
+          "format": "email"
+        }
+      }
+    }
+  }
+}
