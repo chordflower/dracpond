@@ -1,0 +1,151 @@
+= Entities
+
+:theme: colony
+:toc:
+
+These are the entities related to dracpond:
+
+* Repository;
+* Local Repository;
+* Remote Repository;
+* Cached Repository;
+* Compound Repository;
+* Artifact;
+
+== Diagram
+
+[plantuml]
+----
+interface Repository
+interface LocalRepository
+interface RemoteRepository
+interface CachedRepository
+interface CompoundRepository
+interface Artifact
+
+Repository <|-- LocalRepository
+Repository <|-- RemoteRepository
+Repository <|-- CompoundRepository
+CompoundRepository o-- Repository
+LocalRepository <|-- CachedRepository
+RemoteRepository <|-- CachedRepository
+Repository o-- Artifact
+----
+
+== Repository
+
+This is the base entity for the repository entity and represents a place where dracpond, can
+resolve and get artifacts from.
+It contains the following properties:
+
+* name - string;
+* type - enum of local, remote, cached, compound;
+* description - string;
+* format - enum of mvn, npm, crate, gem, wheel, go, dart;
+* creation_date - Date/Time;
+* access_date - Date/Time;
+* modified_date - Date/Time;
+* active - boolean;
+* publishing_url - string (URL);
+
+== Local Repository
+
+This is a repository that is considered local to dracpond and directly managed by it.
+It contains the following properties:
+
+* name - string;
+* type - enum of local, remote, cached, compound;
+* description - string;
+* format - enum of mvn, npm, crate, gem, wheel, go, dart;
+* creation_date - Date/Time;
+* access_date - Date/Time;
+* modified_date - Date/Time;
+* active - boolean;
+* publishing_url - string (URL);
+* path - string;
+* max-size - uint64;
+
+:NOTE: This is the only type of repository, that allows for uploading artifacts.
+
+== Remote Repository
+
+This is a repository that is considered remote to dracpond and is managed by other system.
+It contains the following properties:
+
+* name - string;
+* type - enum of local, remote, cached, compound;
+* description - string;
+* format - enum of mvn, npm, crate, gem, wheel, go, dart;
+* creation_date - Date/Time;
+* access_date - Date/Time;
+* modified_date - Date/Time;
+* active - boolean;
+* publishing_url - string (URL);
+* url - string (URL);
+* schema - string;
+* update_date - Date/Time;
+
+== Cached Repository
+
+This is a remote repository that is cached locally, so that when trying to locate an artifact, dracpond first tries locally and then remotely.
+It contains the following properties:
+
+* name - string;
+* type - enum of local, remote, cached, compound;
+* description - string;
+* format - enum of mvn, npm, crate, gem, wheel, go, dart;
+* creation_date - Date/Time;
+* access_date - Date/Time;
+* modified_date - Date/Time;
+* active - boolean;
+* publishing_url - string (URL);
+* path - string;
+* max-size - uint64;
+* url - string (URL);
+* schema - string;
+* update_date - Date/Time;
+
+== Compound Repository
+
+This is a repository that may combine one or more repositories into a single interface, where the artifacts are
+looked in the repositories, following an ascendent order of insertion, meaning that a compound repository, with:
+
+* local-1;
+* remote-1;
+* local-2;
+* remote-2;
+* cached-1;
+* remote-3;
+
+Will begin to look in local-1, remote-1, local-2, remote-2, cached-1, remote-3 by this order.
+
+:IMPORTANT: If the same artifact is located in two different repositories, for example, local-1 and remote-1, the one in local-1 would be retrieved.
+
+These repositories contain the following properties:
+
+* name - string;
+* type - enum of local, remote, cached, compound;
+* description - string;
+* format - enum of mvn, npm, crate, gem, wheel, go, dart;
+* creation_date - Date/Time;
+* access_date - Date/Time;
+* modified_date - Date/Time;
+* active - boolean;
+* publishing_url - string (URL);
+* associated_repositories - array of repositories;
+
+== Artifact
+
+This represents an blob that may be retrieved or uploaded by a dracpond user.
+It contains the following properties:
+
+* name - string;
+* description - string;
+* format - enum of mvn, npm, crate, gem, wheel, go, dart;
+* hash - string;
+* size - uint64;
+* creation_date - Date/Time;
+* access_date - Date/Time;
+* modified_date - Date/Time;
+* deleted_date - Date/Time;
+* blob - binary data;

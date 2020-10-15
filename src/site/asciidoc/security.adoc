@@ -1,0 +1,25 @@
+= Security
+
+This page describes the various security mechanisms of dracpond.
+
+So for, the artifacts all of them are going to have a whirlpool hash in order to warrant a consistent state of all downloaded artifacts.
+
+Also, the local repositories are stored on a ciphered filesystem, based on cryptomator's cryptfs.
+
+== Permissions
+
+For permissions, these are based on each repository, that is going to have a set of:
+
+* owners;
+* writers;
+* readers;
+
+Also, there is going to be a set of global administrators.
+
+== Users
+
+As for users, they can come from:
+
+* A LDAP directory server;
+* A local database together with required 2FA;
+* A token for automated uses.

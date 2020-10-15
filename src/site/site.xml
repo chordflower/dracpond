@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd" name="Dracpond" xmlns="http://maven.apache.org/DECORATION/1.8.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <bannerLeft>
-    <name>Dracpond</name>
-    <src>/images/dracpond2.png</src>
-  </bannerLeft>
-  <bannerRight>
-    <name>Dracpond</name>
-    <src>/images/dracpond3.png</src>
-  </bannerRight>
   <skin>
     <groupId>org.apache.maven.skins</groupId>
     <artifactId>maven-fluido-skin</artifactId>
     <version>1.8</version>
   </skin>
   <body>
-    <links>
-      <item name="Dracpond" href="./" />
-    </links>
+    <head><![CDATA[
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+<link rel="manifest" href="/site.webmanifest"/>
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000"/>
+<meta name="apple-mobile-web-app-title" content="Dracpond"/>
+<meta name="application-name" content="Dracpond"/>
+<meta name="msapplication-TileColor" content="#2b5797"/>
+<meta name="msapplication-TileImage" content="/mstile-144x144.png"/>
+<meta name="theme-color" content="#000000"/>
+<script type="module">
+//  import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+  import '/scripts/pwaupdate.js';
+  const el = document.createElement('pwa-update');
+  document.body.appendChild(el);
+</script>
+    ]]></head>
+    <menu name="Documentation">
+      <item name="Entities" href="entities.html"/>
+      <item name="Security" href="security.html"/>
+    </menu>
     <menu ref="parent" />
     <menu ref="reports" />
     <footer><![CDATA[
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Dracpond website</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://carddamom.github.com/" property="cc:attributionName" rel="cc:attributionURL">carddamom</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
-<p>The left logo comes from Pixaline (pixabay.com) and is licensed under a CC-BY license</p>
-<p>The right logo comes from Angeleses (pixabay.com) and is licensed under a CC-BY license</p>
+<p><span><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Dracpond website</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://carddamom.github.com/" property="cc:attributionName" rel="cc:attributionURL">carddamom</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</span><br/>
+<span>This logo was made from <a href="https://www.iconfinder.com/josyanimator">Josy Dom Alexis</a></span></p>
     ]]></footer>
   </body>
   <poweredBy>
@@ -33,14 +44,16 @@
   <custom>
     <fluidoSkin>
       <topBarEnabled>true</topBarEnabled>
-      <sideBarEnabled>true</sideBarEnabled>
+      <sideBarEnabled>false</sideBarEnabled>
       <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
-      <gitHub>
-        <projectId>chordflower/dracpond</projectId>
-        <ribbonOrientation>right</ribbonOrientation>
-        <ribbonColor>orange</ribbonColor>
-        <profile>sandbox</profile>
-      </gitHub>
+      <topBarIcon>
+        <name>Dracpond</name>
+        <alt>Dracpond</alt>
+        <src>/images/dracpond.png</src>
+        <height>64px</height>
+        <width>64px</width>
+        <href>/</href>
+      </topBarIcon>
     </fluidoSkin>
   </custom>
 </project>
