@@ -32,6 +32,7 @@ import javax.enterprise.inject.Produces;
 
 import org.apache.deltaspike.cdise.api.CdiContainerLoader;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import com.beust.jcommander.JCommander;
 import com.google.common.base.Strings;
@@ -89,6 +90,8 @@ public class DracpondApp implements Runnable {
 
   @Override
   public void run( ) {
+    SLF4JBridgeHandler.removeHandlersForRootLogger( );
+    SLF4JBridgeHandler.install( );
     var cdiContainer = CdiContainerLoader.getCdiContainer( );
     cdiContainer.boot( );
     var contextControl = cdiContainer.getContextControl( );
@@ -140,6 +143,7 @@ public class DracpondApp implements Runnable {
 
     var retriever = ConfigRetriever.create( vertx, options );
     retriever.getConfig( json -> {
+      System.out.println( json.result( ).toString( ) );
 
       var config = Configuration.fromNode( json.result( ) );
 
