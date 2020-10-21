@@ -253,53 +253,11 @@
           <artifactId>javax.servlet-api</artifactId>
           <groupId>javax.servlet</groupId>
         </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>vaadin-core</artifactId>
-      <version>17.0.4</version>
-      <scope>compile</scope>
-      <exclusions>
         <exclusion>
-          <artifactId>swagger-codegen</artifactId>
-          <groupId>io.swagger.codegen.v3</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>swagger-annotations</artifactId>
-          <groupId>io.swagger.core.v3</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>swagger-codegen-generators</artifactId>
-          <groupId>io.swagger.codegen.v3</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>swagger-core</artifactId>
-          <groupId>io.swagger.core.v3</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>swagger-parser-v3</artifactId>
-          <groupId>io.swagger.parser.v3</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>swagger-models</artifactId>
-          <groupId>io.swagger.core.v3</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>swagger-parser-core</artifactId>
-          <groupId>io.swagger.parser.v3</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-logging</artifactId>
-          <groupId>commons-logging</groupId>
+          <artifactId>flow-server</artifactId>
+          <groupId>com.vaadin</groupId>
         </exclusion>
       </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>com.github.javaparser</groupId>
-      <artifactId>javaparser-symbol-solver-core</artifactId>
-      <version>3.16.2</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>jakarta.servlet</groupId>
@@ -311,12 +269,6 @@
       <groupId>commons-net</groupId>
       <artifactId>commons-net</artifactId>
       <version>3.7</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.cryptomator</groupId>
-      <artifactId>cryptofs</artifactId>
-      <version>1.9.12</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -454,7 +406,7 @@
     <dependency>
       <groupId>org.quartz-scheduler</groupId>
       <artifactId>quartz</artifactId>
-      <version>2.3.0</version>
+      <version>2.3.2</version>
       <scope>compile</scope>
       <exclusions>
         <exclusion>
@@ -600,6 +552,24 @@
           <groupId>com.fasterxml.jackson.core</groupId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>cc.chordflower</groupId>
+      <artifactId>dracpond-lucene</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>cc.chordflower</groupId>
+      <artifactId>dracpond-mina-sshd</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>cc.chordflower</groupId>
+      <artifactId>dracpond-cryptofs</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
   <repositories>
