@@ -1,9 +1,5 @@
 package cc.chordflower.dracpond.utils;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Optional;
-
 /*-
  * #%L
  * dracpond
@@ -14,24 +10,23 @@ import java.util.Optional;
  * it under the terms of the GNU Affero General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * #L%
  */
 
-import lombok.Getter;
-import lombok.ToString;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 
 public interface EnvPath {
 
-  @Getter
-  @ToString
   enum EnvPaths implements EnvPath {
     WINDOWS( Paths.get( Optional.ofNullable( System.getenv( "LOCALAPPDATA" ) ).orElse( Paths.get( System.getenv( "USERPROFILE" ), "AppData", "Local" ).toAbsolutePath( ).normalize( ).toString( ) ), "Dracpond", "Data" ), Paths.get( Optional.ofNullable( System.getenv( "APPDATA" ) ).orElse( Paths.get( System.getenv( "USERPROFILE" ), "AppData", "Roaming" ).toAbsolutePath( ).normalize( ).toString( ) ), "Dracpond", "Config" ), Paths.get( Optional.ofNullable( System.getenv( "LOCALAPPDATA" ) ).orElse( Paths.get( System.getenv( "USERPROFILE" ), "AppData", "Local" ).toAbsolutePath( ).normalize( ).toString( ) ), "Dracpond", "Cache" ), Paths.get( Optional.ofNullable( System.getenv( "LOCALAPPDATA" ) ).orElse( Paths.get( System.getenv( "USERPROFILE" ), "AppData", "Local" ).toAbsolutePath( ).normalize( ).toString( ) ), "Dracpond", "Log" ), Paths.get( System.getenv( "ProgramData" ), "Dracpond", "Data" ), Paths.get( System.getenv( "ProgramData" ), "Dracpond", "Config" ), Paths.get( System.getenv( "ProgramData" ), "Dracpond", "Cache" ), Paths.get( System.getenv( "ProgramData" ), "Dracpond", "Log" ) ), LINUX( Paths.get( Optional.ofNullable( System.getenv( "XDG_DATA_HOME" ) ).orElse( Paths.get( System.getProperty( "user.home" ), ".local", "share" ).toAbsolutePath( ).normalize( ).toString( ) ), "Dracpond" ), Paths.get( Optional.ofNullable( System.getenv( "XDG_CONFIG_HOME" ) ).orElse( Paths.get( System.getProperty( "user.home" ), ".config" ).toAbsolutePath( ).normalize( ).toString( ) ), "Dracpond" ), Paths.get( Optional.ofNullable( System.getenv( "XDG_CACHE_HOME" ) ).orElse( Paths.get( System.getProperty( "user.home" ), ".cache" ).toAbsolutePath( ).normalize( ).toString( ) ), "Dracpond" ), Paths.get( Optional.ofNullable( System.getenv( "XDG_STATE_HOME" ) ).orElse( Paths.get( System.getProperty( "user.home" ), ".local", "state" ).toAbsolutePath( ).normalize( ).toString( ) ), "Dracpond" ), Paths.get( "/", "usr", "share", "Dracpond" ), Paths.get( "/", "etc", "Dracond" ), Paths.get( "/", "var", "cache", "Dracpond" ), Paths.get( "/", "var", "log", "Dracpond" ) ), MACOS( Paths.get( Paths.get( System.getProperty( "user.home" ), "Library" ).toAbsolutePath( ).normalize( ).toString( ), "Application Support", "Dracpond" ), Paths.get( Paths.get( System.getProperty( "user.home" ), "Library" ).toAbsolutePath( ).normalize( ).toString( ), "Preferences", "Dracpond" ), Paths.get( Paths.get( System.getProperty( "user.home" ), "Library" ).toAbsolutePath( ).normalize( ).toString( ), "Caches", "Dracpond" ), Paths.get( Paths.get( System.getProperty( "user.home" ), "Library" ).toAbsolutePath( ).normalize( ).toString( ), "Logs", "Dracpond" ), Paths.get( "/", "Library", "Application Support", "Dracpond" ), Paths.get( "/", "Library", "Preferences", "Dracond" ), Paths.get( "/", "Library", "Caches", "Dracpond" ), Paths.get( "/", "Library", "Logs", "Dracpond" ) );
 
@@ -60,6 +55,46 @@ public interface EnvPath {
       this.systemConfigPath = systemConfigPath;
       this.systemCachePath = systemCachePath;
       this.systemLogPath = systemLogPath;
+    }
+
+    @Override
+    public final Path getSystemCachePath( ) {
+      return this.systemCachePath;
+    }
+
+    @Override
+    public final Path getSystemConfigPath( ) {
+      return this.systemConfigPath;
+    }
+
+    @Override
+    public final Path getSystemDataPath( ) {
+      return this.systemDataPath;
+    }
+
+    @Override
+    public final Path getSystemLogPath( ) {
+      return this.systemLogPath;
+    }
+
+    @Override
+    public final Path getUserCachePath( ) {
+      return this.userCachePath;
+    }
+
+    @Override
+    public final Path getUserConfigPath( ) {
+      return this.userConfigPath;
+    }
+
+    @Override
+    public final Path getUserDataPath( ) {
+      return this.userDataPath;
+    }
+
+    @Override
+    public final Path getUserLogPath( ) {
+      return this.userLogPath;
     }
 
   }

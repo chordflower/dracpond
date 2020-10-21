@@ -21,6 +21,7 @@
 
 module cc.chordflower.dracpond {
   requires org.slf4j;
+  requires jul.to.slf4j;
   requires transitive com.google.common;
   requires io.vavr;
   requires io.vertx.core;
@@ -38,7 +39,6 @@ module cc.chordflower.dracpond {
   requires com.fasterxml.jackson.datatype.guava;
   requires com.fasterxml.jackson.datatype.jdk8;
   requires com.fasterxml.jackson.datatype.jsr310;
-  requires lombok;
   requires jcommander;
 
   exports cc.chordflower.dracpond;
