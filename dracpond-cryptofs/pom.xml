@@ -54,9 +54,9 @@
   </scm>
   <url>https://chordflower.github.io/dracpond</url>
   <properties>
-    <java.version>14</java.version>
-    <maven.compiler.source>14</maven.compiler.source>
-    <maven.compiler.target>14</maven.compiler.target>
+    <java.version>1.8</java.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.debug>false</maven.compiler.debug>
@@ -76,7 +76,6 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <release>15</release>
           <annotationProcessorPaths>
             <path>
               <groupId>com.google.auto.factory</groupId>
@@ -120,7 +119,6 @@
               <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
               <addExtensions>true</addExtensions>
               <useUniqueVersions>true</useUniqueVersions>
-              <mainClass>${mainclass}</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -220,7 +218,6 @@
         <configuration>
           <outputDirectory>${project.build.directory}/classes</outputDirectory>
           <attach>true</attach>
-          <properties></properties>
         </configuration>
         <executions>
           <execution>
@@ -229,37 +226,6 @@
             <goals>
               <goal>create-metadata</goal>
             </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <configuration>
-          <verbose>true</verbose>
-        </configuration>
-        <executions>
-          <execution>
-            <id>update-file-header</id>
-            <goals>
-              <goal>update-file-header</goal>
-            </goals>
-            <phase>process-sources</phase>
-            <configuration>
-              <licenseName>agpl_v3</licenseName>
-              <organizationName>carddamom</organizationName>
-              <emptyLineAfterHeader>true</emptyLineAfterHeader>
-              <roots>
-                <root>src/main</root>
-                <root>src/test</root>
-              </roots>
-              <extraExtensions>
-                <fxml>xml</fxml>
-              </extraExtensions>
-              <excludes>
-                <exclude>*.json</exclude>
-              </excludes>
-            </configuration>
           </execution>
         </executions>
       </plugin>

@@ -54,6 +54,7 @@
   <modules>
     <module>dracpond-lucene</module>
     <module>dracpond-mina-sshd</module>
+    <module>dracpond-jakarta-el</module>
     <module>dracpond</module>
     <module>dracpond-cryptofs</module>
   </modules>
@@ -118,6 +119,11 @@
       <dependency>
         <groupId>cc.chordflower</groupId>
         <artifactId>dracpond-cryptofs</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>cc.chordflower</groupId>
+        <artifactId>dracpond-jakarta-el</artifactId>
         <version>0.0.1-SNAPSHOT</version>
       </dependency>
     </dependencies>

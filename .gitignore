@@ -629,3 +629,5 @@ gradle-app.setting
 /.apt_generated_tests/
 .classpath
 .project
+dracpond/.flattened-pom.xml
+dracpond-cryptofs/.flattened-pom.xml

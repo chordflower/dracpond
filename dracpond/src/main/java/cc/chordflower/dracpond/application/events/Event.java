@@ -1,32 +1,13 @@
 package cc.chordflower.dracpond.application.events;
 
-import java.util.Objects;
-
-/*-
- * #%L
- * dracpond
- * %%
- * Copyright (C) 2020 carddamom
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * #L%
- */
-
 import cc.chordflower.dracpond.application.arguments.Arguments;
 import cc.chordflower.dracpond.application.config.Configuration;
 import io.vavr.collection.Seq;
+import org.jetbrains.annotations.Contract;
 
+import java.util.Objects;
+
+@SuppressWarnings( "unused" )
 public abstract class Event< T > {
   public static class AfterParseArgumentsEvent extends Event< Arguments > {
     public AfterParseArgumentsEvent( Arguments arguments ) {
@@ -56,13 +37,13 @@ public abstract class Event< T > {
 
   protected final T data;
 
-  protected Event( EventType eventType, T data ) {
+  @Contract( pure = true ) protected Event( EventType eventType, T data ) {
     super( );
     this.eventType = eventType;
     this.data = data;
   }
 
-  @Override
+  @Contract( value = "null -> false", pure = true ) @Override
   public boolean equals( Object obj ) {
     if( this == obj ) {
       return true;
@@ -70,15 +51,15 @@ public abstract class Event< T > {
     if( !( obj instanceof Event ) ) {
       return false;
     }
-    var other = ( Event )obj;
+    Event<?> other = ( Event<?> ) obj;
     return Objects.equals( this.data, other.data ) && ( this.eventType == other.eventType );
   }
 
-  public final T getData( ) {
+  @Contract( pure = true ) public final T getData( ) {
     return this.data;
   }
 
-  public final EventType getEventType( ) {
+  @Contract( pure = true ) public final EventType getEventType( ) {
     return this.eventType;
   }
 

@@ -1,25 +1,6 @@
 package cc.chordflower.dracpond.utils;
 
-/*-
- * #%L
- * dracpond
- * %%
- * Copyright (C) 2020 carddamom
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * #L%
- */
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -38,6 +19,7 @@ import java.util.Set;
 /**
  * Implements the file api using the given path instead, to allow for diferent filesystem implementations.
  */
+@SuppressWarnings( { "unchecked", "ResultOfMethodCallIgnored", "unused" } )
 public class ProxyFile extends File {
 
   private static final long serialVersionUID = 1L;
@@ -71,7 +53,8 @@ public class ProxyFile extends File {
   @Override
   public boolean createNewFile( ) throws IOException {
     try {
-      return Files.createFile( this._filePath ) != null;
+      Files.createFile( this._filePath );
+      return true;
     } catch( FileAlreadyExistsException ex ) {
       return false;
     }
@@ -106,22 +89,22 @@ public class ProxyFile extends File {
   }
 
   @Override
-  public File getAbsoluteFile( ) {
+  public @NotNull File getAbsoluteFile( ) {
     return new ProxyFile( this._filePath.toAbsolutePath( ) );
   }
 
   @Override
-  public String getAbsolutePath( ) {
+  public @NotNull String getAbsolutePath( ) {
     return this._filePath.toAbsolutePath( ).toString( );
   }
 
   @Override
-  public File getCanonicalFile( ) throws IOException {
+  public @NotNull File getCanonicalFile( ) {
     return new ProxyFile( this._filePath.toAbsolutePath( ).normalize( ) );
   }
 
   @Override
-  public String getCanonicalPath( ) throws IOException {
+  public @NotNull String getCanonicalPath( ) {
     return this._filePath.toAbsolutePath( ).normalize( ).toString( );
   }
 
@@ -131,7 +114,7 @@ public class ProxyFile extends File {
   }
 
   @Override
-  public String getName( ) {
+  public @NotNull String getName( ) {
     return this._filePath.getFileName( ).toString( );
   }
 
@@ -146,7 +129,7 @@ public class ProxyFile extends File {
   }
 
   @Override
-  public String getPath( ) {
+  public @NotNull String getPath( ) {
     return this._filePath.toString( );
   }
 
@@ -237,6 +220,9 @@ public class ProxyFile extends File {
   @Override
   public File[ ] listFiles( FileFilter filter ) {
     try {
+      if( filter == null ) {
+        throw new NullPointerException( );
+      }
       return Files.list( this._filePath ).map( ProxyFile::new ).filter( filter::accept ).toArray( File[ ]::new );
     } catch( IOException e ) {
       return null;
@@ -255,7 +241,8 @@ public class ProxyFile extends File {
   @Override
   public boolean mkdir( ) {
     try {
-      return Files.createDirectory( this._filePath ) != null;
+      Files.createDirectory( this._filePath );
+      return true;
     } catch( IOException e ) {
       return false;
     }
@@ -273,7 +260,8 @@ public class ProxyFile extends File {
   @Override
   public boolean renameTo( File dest ) {
     try {
-      return Files.move( this._filePath, dest.toPath( ) ) != null;
+      Files.move( this._filePath, dest.toPath( ) );
+      return true;
     } catch( IOException e ) {
       return false;
     }
@@ -289,7 +277,7 @@ public class ProxyFile extends File {
     try {
       Set< PosixFilePermission > permissions = new HashSet<>( ( Set< PosixFilePermission > )Files.getAttribute( this._filePath, "posix.permissions" ) );
       if( executable ) {
-        var newPermissions = ownerOnly ? EnumSet.of( PosixFilePermission.OWNER_EXECUTE ) : EnumSet.of( PosixFilePermission.GROUP_EXECUTE, PosixFilePermission.OTHERS_EXECUTE, PosixFilePermission.OWNER_EXECUTE );
+        EnumSet< PosixFilePermission > newPermissions = ownerOnly ? EnumSet.of( PosixFilePermission.OWNER_EXECUTE ) : EnumSet.of( PosixFilePermission.GROUP_EXECUTE, PosixFilePermission.OTHERS_EXECUTE, PosixFilePermission.OWNER_EXECUTE );
         permissions.addAll( newPermissions );
       } else {
         permissions.remove( PosixFilePermission.OWNER_EXECUTE );
@@ -298,7 +286,8 @@ public class ProxyFile extends File {
           permissions.remove( PosixFilePermission.OTHERS_EXECUTE );
         }
       }
-      return Files.setAttribute( this._filePath, "posix.permissions", permissions ) != null;
+      Files.setAttribute( this._filePath, "posix.permissions", permissions );
+      return true;
     } catch( IOException e ) {
       return false;
     }
@@ -307,7 +296,8 @@ public class ProxyFile extends File {
   @Override
   public boolean setLastModified( long time ) {
     try {
-      return Files.setLastModifiedTime( this._filePath, FileTime.fromMillis( time ) ) != null;
+      Files.setLastModifiedTime( this._filePath, FileTime.fromMillis( time ) );
+      return true;
     } catch( IOException e ) {
       return false;
     }
@@ -323,7 +313,7 @@ public class ProxyFile extends File {
     try {
       Set< PosixFilePermission > permissions = new HashSet<>( ( Set< PosixFilePermission > )Files.getAttribute( this._filePath, "posix.permissions" ) );
       if( readable ) {
-        var newPermissions = ownerOnly ? EnumSet.of( PosixFilePermission.OWNER_READ ) : EnumSet.of( PosixFilePermission.GROUP_READ, PosixFilePermission.OTHERS_READ, PosixFilePermission.OWNER_READ );
+        EnumSet< PosixFilePermission > newPermissions = ownerOnly ? EnumSet.of( PosixFilePermission.OWNER_READ ) : EnumSet.of( PosixFilePermission.GROUP_READ, PosixFilePermission.OTHERS_READ, PosixFilePermission.OWNER_READ );
         permissions.addAll( newPermissions );
       } else {
         permissions.remove( PosixFilePermission.OWNER_READ );
@@ -332,10 +322,12 @@ public class ProxyFile extends File {
           permissions.remove( PosixFilePermission.OTHERS_READ );
         }
       }
-      return Files.setAttribute( this._filePath, "posix.permissions", permissions ) != null;
+      Files.setAttribute( this._filePath, "posix.permissions", permissions );
+      return true;
     } catch( IOException e ) {
       try {
-        return Files.setAttribute( this._filePath, "dos.readonly", Boolean.valueOf( readable ) ) != null;
+        Files.setAttribute( this._filePath, "dos.readonly", readable );
+        return true;
       } catch( IOException e1 ) {
         return false;
       }
@@ -348,10 +340,12 @@ public class ProxyFile extends File {
       Set< PosixFilePermission > newPermissions = EnumSet.of( PosixFilePermission.GROUP_READ, PosixFilePermission.OTHERS_READ, PosixFilePermission.OWNER_READ );
       Set< PosixFilePermission > permissions = new HashSet<>( ( Set< PosixFilePermission > )Files.getAttribute( this._filePath, "posix.permissions" ) );
       permissions.addAll( newPermissions );
-      return Files.setAttribute( this._filePath, "posix.permissions", permissions ) != null;
+      Files.setAttribute( this._filePath, "posix.permissions", permissions );
+      return true;
     } catch( IOException e ) {
       try {
-        return Files.setAttribute( this._filePath, "dos.readonly", Boolean.TRUE ) != null;
+        Files.setAttribute( this._filePath, "dos.readonly", Boolean.TRUE );
+        return true;
       } catch( IOException e1 ) {
         return false;
       }
@@ -368,7 +362,7 @@ public class ProxyFile extends File {
     try {
       Set< PosixFilePermission > permissions = new HashSet<>( ( Set< PosixFilePermission > )Files.getAttribute( this._filePath, "posix.permissions" ) );
       if( writable ) {
-        var newPermissions = ownerOnly ? EnumSet.of( PosixFilePermission.OWNER_WRITE ) : EnumSet.of( PosixFilePermission.GROUP_WRITE, PosixFilePermission.OTHERS_WRITE, PosixFilePermission.OWNER_WRITE );
+        EnumSet< PosixFilePermission > newPermissions = ownerOnly ? EnumSet.of( PosixFilePermission.OWNER_WRITE ) : EnumSet.of( PosixFilePermission.GROUP_WRITE, PosixFilePermission.OTHERS_WRITE, PosixFilePermission.OWNER_WRITE );
         permissions.addAll( newPermissions );
       } else {
         permissions.remove( PosixFilePermission.OWNER_WRITE );
@@ -377,14 +371,15 @@ public class ProxyFile extends File {
           permissions.remove( PosixFilePermission.OTHERS_WRITE );
         }
       }
-      return Files.setAttribute( this._filePath, "posix.permissions", permissions ) != null;
+      Files.setAttribute( this._filePath, "posix.permissions", permissions );
+      return true;
     } catch( IOException e ) {
       return false;
     }
   }
 
   @Override
-  public Path toPath( ) {
+  public @NotNull Path toPath( ) {
     return this._filePath;
   }
 
@@ -394,7 +389,7 @@ public class ProxyFile extends File {
   }
 
   @Override
-  public URI toURI( ) {
+  public @NotNull URI toURI( ) {
     return this._filePath.toUri( );
   }
 

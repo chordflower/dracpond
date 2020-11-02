@@ -1,13 +1,31 @@
 package cc.chordflower.dracpond;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import cc.chordflower.dracpond.application.arguments.Arguments;
+import cc.chordflower.dracpond.application.config.Configuration;
+import cc.chordflower.dracpond.application.events.Event;
+import cc.chordflower.dracpond.utils.EnvPath;
+import com.beust.jcommander.JCommander;
+import com.google.common.base.Strings;
+import com.google.common.eventbus.EventBus;
+import io.vavr.collection.Array;
+import io.vertx.config.ConfigRetriever;
+import io.vertx.config.ConfigRetrieverOptions;
+import io.vertx.config.ConfigStoreOptions;
+import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
+import org.apache.deltaspike.cdise.api.CdiContainer;
+import org.apache.deltaspike.cdise.api.CdiContainerLoader;
+import org.apache.deltaspike.cdise.api.ContextControl;
+import org.apache.deltaspike.core.api.provider.BeanProvider;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /*-
  * #%L
@@ -30,34 +48,16 @@ import javax.enterprise.inject.Produces;
  * #L%
  */
 
-import org.apache.deltaspike.cdise.api.CdiContainerLoader;
-import org.apache.deltaspike.core.api.provider.BeanProvider;
-import org.slf4j.bridge.SLF4JBridgeHandler;
-
-import com.beust.jcommander.JCommander;
-import com.google.common.base.Strings;
-import com.google.common.eventbus.EventBus;
-
-import cc.chordflower.dracpond.application.arguments.Arguments;
-import cc.chordflower.dracpond.application.config.Configuration;
-import cc.chordflower.dracpond.application.events.Event;
-import cc.chordflower.dracpond.utils.EnvPath;
-import io.vavr.collection.Array;
-import io.vertx.config.ConfigRetriever;
-import io.vertx.config.ConfigRetrieverOptions;
-import io.vertx.config.ConfigStoreOptions;
-import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonObject;
-
 public class DracpondApp implements Runnable {
 
   public static ConfigStoreOptions getEnvironmentConfigStore( ) {
     return new ConfigStoreOptions( ).setType( "env" ).setConfig( new JsonObject( ).put( "raw-data", true ) );
   }
 
+  @Contract( " -> new" )
   @Produces
   @ApplicationScoped
-  public static EventBus getEventBus( ) {
+  public static @NotNull EventBus getEventBus( ) {
     return new EventBus( );
   }
 
@@ -74,7 +74,7 @@ public class DracpondApp implements Runnable {
   }
 
   public static void main( String... args ) {
-    var app = new DracpondApp( args );
+    DracpondApp app = new DracpondApp( args );
     app.run( );
   }
 
@@ -92,28 +92,20 @@ public class DracpondApp implements Runnable {
   public void run( ) {
     SLF4JBridgeHandler.removeHandlersForRootLogger( );
     SLF4JBridgeHandler.install( );
-    var cdiContainer = CdiContainerLoader.getCdiContainer( );
+    CdiContainer cdiContainer = CdiContainerLoader.getCdiContainer( );
     cdiContainer.boot( );
-    var contextControl = cdiContainer.getContextControl( );
+    ContextControl contextControl = cdiContainer.getContextControl( );
     contextControl.startContext( ApplicationScoped.class );
 
-    // Write the process pid to a file
-    var currPid = ProcessHandle.current( ).pid( );
-    try {
-      Files.writeString( Path.of( "./process.pid" ), Long.toString( currPid ), StandardCharsets.UTF_8 );
-    } catch( IOException e ) {
-      // Temporary
-    }
-
     // Emit before start event
-    var eventBus = BeanProvider.getContextualReference( EventBus.class );
+    EventBus eventBus = BeanProvider.getContextualReference( EventBus.class );
     eventBus.post( new Event.BeforeStartEvent( ) );
 
     // Emit before parse arguments event (together with the arguments)
     eventBus.post( new Event.BeforeParseArgumentsEvent( Array.of( this.args ) ) );
 
     // Parse arguments
-    var arguments = new Arguments( );
+    Arguments arguments = new Arguments( );
     //@formatter:off
     JCommander.newBuilder( )
       .addObject( arguments )
@@ -128,9 +120,9 @@ public class DracpondApp implements Runnable {
     eventBus.post( new Event.AfterParseArgumentsEvent( arguments ) );
 
     // Parse configuration
-    var vertx = Vertx.vertx( );
+    Vertx vertx = Vertx.vertx( );
 
-    var options = new ConfigRetrieverOptions( ).setIncludeDefaultStores( false );
+    ConfigRetrieverOptions options = new ConfigRetrieverOptions( ).setIncludeDefaultStores( false );
 
     if( !Strings.isNullOrEmpty( arguments.getConfig( ) ) && Files.exists( Paths.get( arguments.getConfig( ) ) ) ) {
       options.addStore( new ConfigStoreOptions( ).setType( "file" ).setFormat( this.getFormatForFile( Paths.get( arguments.getConfig( ) ).getFileName( ) ) ).setOptional( false ).setConfig( new JsonObject( ).put( "path", arguments.getConfig( ) ) ) );
@@ -141,11 +133,11 @@ public class DracpondApp implements Runnable {
     options.addStore( DracpondApp.getEnvironmentConfigStore( ) );
     options.setScanPeriod( Long.MAX_VALUE );
 
-    var retriever = ConfigRetriever.create( vertx, options );
+    ConfigRetriever retriever = ConfigRetriever.create( vertx, options );
     retriever.getConfig( json -> {
       System.out.println( json.result( ).toString( ) );
 
-      var config = Configuration.fromNode( json.result( ) );
+      Configuration config = Configuration.fromNode( json.result( ) );
 
       // Emit the after parse configuration event (together with the parsed configuration)
       eventBus.post( new Event.AfterParseConfigurationEvent( config ) );
