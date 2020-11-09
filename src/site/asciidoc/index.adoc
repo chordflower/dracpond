@@ -2,6 +2,8 @@
 :theme: colony
 
 https://www.codefactor.io/repository/github/chordflower/dracpond[image:https://www.codefactor.io/repository/github/chordflower/dracpond/badge[CodeFactor]]
+image:https://travis-ci.com/chordflower/dracpond.svg?branch=develop["Build Status", link="https://travis-ci.com/chordflower/dracpond"]
+
 
 This is a repository manager/proxy for several services:
 
@@ -26,7 +28,7 @@ Instead it will focus on programming related packages, like the one described fi
 
 == Coding
 
-Dracpond is written in Java, and uses:
+Dracpond is written in Kotlin, and uses:
 
 * VertX and friends as a base framework, specifically:
 ** VertX web for responding to requests;
@@ -40,23 +42,3 @@ Dracpond is written in Java, and uses:
 * Vaadin for creating the web interface;
 * Various NIO.2 filesystem implementations for comunicating with FTP's, creating cyphered archives;
 * Maven as it's build system.
-
-=== Building
-
-To launch your tests:
-
-```
-./mvnw clean test
-```
-
-To package your application:
-
-```
-./mvnw clean package
-```
-
-To run your application:
-
-```
-./mvnw clean compile exec:java
-```

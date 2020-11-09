@@ -31,9 +31,8 @@
   </issueManagement>
   <distributionManagement>
     <site>
-      <id>main</id>
-      <name>main</name>
-      <url>https://chordflower.github.io/dracpond</url>
+      <id>${project.artifactId}-site</id>
+      <url>${project.baseUri}</url>
     </site>
     <repository>
       <id>github</id>

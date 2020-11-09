@@ -1,6 +1,7 @@
 {
     "name": "Dracpond",
     "short_name": "Dracpond",
+    "start_url": "./index.html",
     "icons": [
         {
             "src": "/android-chrome-36x36.png",
