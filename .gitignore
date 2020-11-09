@@ -631,3 +631,4 @@ gradle-app.setting
 .project
 dracpond/.flattened-pom.xml
 dracpond-cryptofs/.flattened-pom.xml
+dracpond-cryptofs-plugin/.flattened-pom.xml
