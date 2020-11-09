@@ -25,11 +25,11 @@
     </encoder>
   </appender>
   <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>./log/md-proj.log</file>
+    <file>./log/dracpond.log</file>
     <append>true</append>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- daily rollover -->
-      <fileNamePattern>./log/md-proj.log.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <fileNamePattern>./log/dracpond.log.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
       <maxHistory>30</maxHistory>
       <totalSizeCap>3GB</totalSizeCap>
       <cleanHistoryOnStart>true</cleanHistoryOnStart>

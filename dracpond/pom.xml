@@ -9,74 +9,8 @@
   </parent>
   <artifactId>dracpond</artifactId>
   <description>A repository manager</description>
-  <inceptionYear>2020</inceptionYear>
-  <developers>
-    <developer>
-      <id>lead</id>
-      <name>carddamom</name>
-      <email>carddamom dot tutanota dot com</email>
-      <organization>chordflower</organization>
-      <url>https://carddamom.github.io/</url>
-    </developer>
-  </developers>
-  <licenses>
-    <license>
-      <name>AGPL-3.0-or-later</name>
-      <url>https://www.gnu.org/licenses/agpl-3.0.txt</url>
-      <distribution>repo</distribution>
-      <comments>GNU Affero General Public License 3.0 or later</comments>
-    </license>
-  </licenses>
-  <issueManagement>
-    <system>github</system>
-    <url>https://github.com/chordflower/dracpond/issues</url>
-  </issueManagement>
-  <distributionManagement>
-    <site>
-      <id>main</id>
-      <name>main</name>
-      <url>https://chordflower.github.io/dracpond</url>
-    </site>
-    <repository>
-      <id>github</id>
-      <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/chordflower/dracpond</url>
-    </repository>
-  </distributionManagement>
-  <organization>
-    <name>chordflower</name>
-  </organization>
-  <scm>
-    <url>https://github.com/chordflower/dracpond/tree/master</url>
-    <connection>scm:git:https://github.com/chordflower/dracpond.git</connection>
-    <developerConnection>scm:git:https://github.com/chordflower/dracpond.git</developerConnection>
-    <tag>develop</tag>
-  </scm>
-  <url>https://chordflower.github.io/dracpond</url>
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.debug>false</maven.compiler.debug>
-    <maven.compiler.parameters>true</maven.compiler.parameters>
-    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
-    <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-    <maven.compiler.useIncrementalCompilation>true</maven.compiler.useIncrementalCompilation>
-    <maven.clean.retryOnError>true</maven.clean.retryOnError>
-    <maven.clean.followSymLinks>true</maven.clean.followSymLinks>
     <mainclass>cc.chordflower.dracpond.DracpondApp</mainclass>
-
-    <!-- Versions -->
-    <maven-shade-plugin.version>2.4.3</maven-shade-plugin.version>
-    <exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
-    <vertx.version>4.0.0.Beta3</vertx.version>
-    <junit-jupiter.version>5.7.0</junit-jupiter.version>
-    <jackson.version>2.11.2</jackson.version>
-    <log4j.version>1.7.30</log4j.version>
-    <logback.version>1.2.3</logback.version>
-    <deltaspike.version>1.9.4</deltaspike.version>
-    <owb.version>2.0.18</owb.version>
   </properties>
 
   <dependencyManagement>
@@ -91,7 +25,7 @@
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-bom</artifactId>
-        <version>1.5.5</version>
+        <version>${micrometer-bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -172,7 +106,7 @@
     <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
-      <version>1.15</version>
+      <version>${commons-codec.version}</version>
     </dependency>
 
     <!-- Metrics -->
@@ -189,69 +123,64 @@
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
       <artifactId>oak-jcr</artifactId>
-      <version>1.34.0</version>
+      <version>${oak.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
       <artifactId>oak-api</artifactId>
-      <version>1.34.0</version>
+      <version>${oak.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
       <artifactId>oak-jackrabbit-api</artifactId>
-      <version>1.34.0</version>
+      <version>${oak.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
       <artifactId>oak-core</artifactId>
-      <version>1.34.0</version>
+      <version>${oak.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
       <artifactId>oak-commons</artifactId>
-      <version>1.34.0</version>
+      <version>${oak.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
       <artifactId>oak-segment-tar</artifactId>
-      <version>1.34.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.jackrabbit</groupId>
-      <artifactId>oak-segment</artifactId>
-      <version>1.6.20</version>
+      <version>${oak.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
       <artifactId>oak-blob-plugins</artifactId>
-      <version>1.34.0</version>
+      <version>${oak.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
       <artifactId>oak-blob</artifactId>
-      <version>1.34.0</version>
+      <version>${oak.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
       <artifactId>oak-store-composite</artifactId>
-      <version>1.34.0</version>
+      <version>${oak.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.jackrabbit</groupId>
       <artifactId>oak-search</artifactId>
-      <version>1.34.0</version>
+      <version>${oak.version}</version>
     </dependency>
     <dependency>
       <groupId>javax.jcr</groupId>
       <artifactId>jcr</artifactId>
-      <version>2.0</version>
+      <version>${jcr.version}</version>
     </dependency>
 
     <!-- Vaadin flow -->
     <dependency>
       <groupId>com.github.mcollovati.vertx</groupId>
       <artifactId>vertx-vaadin-flow</artifactId>
-      <version>17.0.0</version>
+      <version>${vertx-vaadin-flow.version}</version>
       <exclusions>
         <exclusion>
           <groupId>javax.servlet</groupId>
@@ -266,7 +195,7 @@
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
-      <version>4.0.4</version>
+      <version>${jakarta.servlet-api.version}</version>
       <scope>runtime</scope>
     </dependency>
 
@@ -274,39 +203,39 @@
     <dependency>
       <groupId>commons-net</groupId>
       <artifactId>commons-net</artifactId>
-      <version>3.7</version>
+      <version>${commons-net.version}</version>
     </dependency>
 
     <!-- Utilities -->
     <dependency>
       <groupId>com.github.ben-manes.caffeine</groupId>
       <artifactId>guava</artifactId>
-      <version>2.8.5</version>
+      <version>${caffeine.version}</version>
     </dependency>
     <dependency>
       <groupId>com.github.ben-manes.caffeine</groupId>
       <artifactId>caffeine</artifactId>
-      <version>2.8.5</version>
+      <version>${caffeine.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.auto.service</groupId>
       <artifactId>auto-service-annotations</artifactId>
-      <version>1.0-rc7</version>
+      <version>${auto-service-annotations.version}</version>
     </dependency>
     <dependency>
       <groupId>org.threeten</groupId>
       <artifactId>threeten-extra</artifactId>
-      <version>1.5.0</version>
+      <version>${threeten-extra.version}</version>
     </dependency>
     <dependency>
       <groupId>io.vavr</groupId>
       <artifactId>vavr</artifactId>
-      <version>1.0.0-alpha-3</version>
+      <version>${vavr.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>29.0-jre</version>
+      <version>${guava.version}</version>
       <exclusions>
         <exclusion>
           <groupId>com.google.code.findbugs</groupId>
@@ -317,25 +246,25 @@
     <dependency>
       <groupId>com.beust</groupId>
       <artifactId>jcommander</artifactId>
-      <version>1.78</version>
+      <version>${jcommander.version}</version>
     </dependency>
 
     <!-- Annotations -->
     <dependency>
       <groupId>org.jetbrains</groupId>
       <artifactId>annotations</artifactId>
-      <version>20.1.0</version>
+      <version>${annotations.version}</version>
     </dependency>
     <dependency>
       <groupId>jakarta.validation</groupId>
       <artifactId>jakarta.validation-api</artifactId>
-      <version>3.0.0</version>
+      <version>${jakarta.validation-api.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>7.0.0.Alpha6</version>
+      <version>${hibernate-validator.version}</version>
       <scope>runtime</scope>
       <exclusions>
         <exclusion>
@@ -347,17 +276,12 @@
     <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator-cdi</artifactId>
-      <version>7.0.0.Alpha6</version>
+      <version>${hibernate-validator-cdi.version}</version>
     </dependency>
     <dependency>
-      <groupId>cc.chordflower</groupId>
-      <artifactId>dracpond-jakarta-el</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.glassfish</groupId>
-          <artifactId>jakarta.el</artifactId>
-        </exclusion>
-      </exclusions>
+      <groupId>org.glassfish</groupId>
+      <artifactId>jakarta.el</artifactId>
+      <version>${jakarta.el.version}</version>
     </dependency>
 
     <!-- Dependency injection -->
@@ -400,7 +324,7 @@
     <dependency>
       <groupId>javax.enterprise</groupId>
       <artifactId>cdi-api</artifactId>
-      <version>2.0.SP1</version>
+      <version>${cdi-api.version}</version>
       <exclusions>
         <exclusion>
           <groupId>javax.el</groupId>
@@ -411,7 +335,7 @@
     <dependency>
       <groupId>javax.annotation</groupId>
       <artifactId>javax.annotation-api</artifactId>
-      <version>1.3.2</version>
+      <version>${javax.annotation-api.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.deltaspike.modules</groupId>
@@ -428,7 +352,7 @@
     <dependency>
       <groupId>org.quartz-scheduler</groupId>
       <artifactId>quartz</artifactId>
-      <version>2.3.2</version>
+      <version>${quartz.version}</version>
       <exclusions>
         <exclusion>
           <groupId>com.mchange</groupId>
@@ -481,7 +405,7 @@
     <dependency>
       <groupId>io.vavr</groupId>
       <artifactId>vavr-jackson</artifactId>
-      <version>1.0.0-alpha-3</version>
+      <version>${vavr.version}</version>
       <exclusions>
         <exclusion>
           <artifactId>jackson-databind</artifactId>
@@ -554,111 +478,13 @@
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>6.4</version>
+      <version>${logstash-logback-encoder.version}</version>
       <exclusions>
         <exclusion>
           <artifactId>jackson-databind</artifactId>
           <groupId>com.fasterxml.jackson.core</groupId>
         </exclusion>
       </exclusions>
-    </dependency>
-
-    <!-- Self dependencies -->
-    <dependency>
-      <groupId>cc.chordflower</groupId>
-      <artifactId>dracpond-lucene</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.apache.lucene</groupId>
-          <artifactId>lucene-queries</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.lucene</groupId>
-          <artifactId>lucene-suggest</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.lucene</groupId>
-          <artifactId>lucene-facet</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.lucene</groupId>
-          <artifactId>lucene-queryparser</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.tika</groupId>
-          <artifactId>tika-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.lucene</groupId>
-          <artifactId>lucene-memory</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.lucene</groupId>
-          <artifactId>lucene-misc</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.lucene</groupId>
-          <artifactId>lucene-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.lucene</groupId>
-          <artifactId>lucene-highlighter</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.lucene</groupId>
-          <artifactId>lucene-analyzers-common</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>cc.chordflower</groupId>
-      <artifactId>dracpond-mina-sshd</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.apache.sshd</groupId>
-          <artifactId>sshd-scp</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.sshd</groupId>
-          <artifactId>sshd-ldap</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.sshd</groupId>
-          <artifactId>sshd-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.sshd</groupId>
-          <artifactId>sshd-sftp</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.sshd</groupId>
-          <artifactId>sshd-common</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.sshd</groupId>
-          <artifactId>sshd-netty</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.sshd</groupId>
-          <artifactId>sshd-contrib</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.sshd</groupId>
-          <artifactId>sshd-openpgp</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.sshd</groupId>
-          <artifactId>sshd-git</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.sshd</groupId>
-          <artifactId>sshd-putty</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>cc.chordflower</groupId>
-      <artifactId>dracpond-cryptofs</artifactId>
     </dependency>
 
     <!-- Testing dependencies -->
@@ -683,28 +509,6 @@
 
   <build>
     <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>com.google.auto.factory</groupId>
-              <artifactId>auto-factory</artifactId>
-              <version>1.0-beta8</version>
-            </path>
-            <path>
-              <groupId>com.google.auto.service</groupId>
-              <artifactId>auto-service</artifactId>
-              <version>1.0-rc7</version>
-            </path>
-            <path>
-              <groupId>org.hibernate.validator</groupId>
-              <artifactId>hibernate-validator-annotation-processor</artifactId>
-              <version>7.0.0.Alpha6</version>
-            </path>
-          </annotationProcessorPaths>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -747,92 +551,6 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <configuration>
-          <includeEmptyDirs>true</includeEmptyDirs>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <compress>true</compress>
-            <addMavenDescriptor>true</addMavenDescriptor>
-            <index>true</index>
-            <recompressAddedZips>true</recompressAddedZips>
-            <manifest>
-              <addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>
-              <addClasspath>true</addClasspath>
-              <addDefaultEntries>true</addDefaultEntries>
-              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-              <addExtensions>true</addExtensions>
-              <useUniqueVersions>true</useUniqueVersions>
-              <mainClass>${mainclass}</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <enableAssertions>true</enableAssertions>
-          <reportFormat>plain</reportFormat>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-install-plugin</artifactId>
-        <configuration>
-          <installAtEnd>true</installAtEnd>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>org.asciidoctor</groupId>
-            <artifactId>asciidoctor-maven-plugin</artifactId>
-            <version>2.1.0</version>
-          </dependency>
-          <dependency>
-            <groupId>com.puravida.asciidoctor</groupId>
-            <artifactId>asciidoctor-themes</artifactId>
-            <version>2.1.0</version>
-          </dependency>
-          <dependency>
-            <groupId>org.asciidoctor</groupId>
-            <artifactId>asciidoctorj-diagram</artifactId>
-            <version>2.0.5</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <asciidoc>
-            <attributes>
-              <icons>font</icons>
-              <source-highlighter>highlightjs</source-highlighter>
-              <highlightjs-theme>kimbie.light</highlightjs-theme>
-              <toclevels>6</toclevels>
-              <outdir>${basedir}/target/site</outdir>
-            </attributes>
-            <requires>
-              <require>asciidoctor-diagram</require>
-            </requires>
-          </asciidoc>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <executions>
           <execution>
@@ -844,24 +562,6 @@
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <attach>true</attach>
-          <archive>
-            <addMavenDescriptor>true</addMavenDescriptor>
-            <compress>true</compress>
-            <index>true</index>
-            <recompressAddedZips>true</recompressAddedZips>
-            <manifest>
-              <addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>
-              <addClasspath>true</addClasspath>
-              <addDefaultEntries>true</addDefaultEntries>
-              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-              <addExtensions>true</addExtensions>
-              <useUniqueVersions>true</useUniqueVersions>
-            </manifest>
-          </archive>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -906,64 +606,8 @@
       </plugin>
     </plugins>
   </build>
-
-  <repositories>
-    <repository>
-      <id>sonatype-oss-snapshots</id>
-      <name>Sonatype OSSRH Snapshots</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <layout>default</layout>
-      <releases>
-        <enabled>false</enabled>
-        <updatePolicy>never</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>Vaadin Directory</id>
-      <url>https://maven.vaadin.com/vaadin-addons</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <id>bintray-puravida-software-repo</id>
-      <name>bintray</name>
-      <url>https://dl.bintray.com/puravida-software/repo</url>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <id>bintray-puravida-software-repo</id>
-      <name>bintray-plugins</name>
-      <url>https://dl.bintray.com/puravida-software/repo</url>
-    </pluginRepository>
-  </pluginRepositories>
-
   <reporting>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.1.2</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>analyze-report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
@@ -976,74 +620,6 @@
             </reports>
           </reportSet>
         </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.0.0</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>ci-management</report>
-              <report>dependencies</report>
-              <report>dependency-convergence</report>
-              <report>dependency-info</report>
-              <report>dependency-management</report>
-              <report>distribution-management</report>
-              <report>index</report>
-              <report>issue-management</report>
-              <report>licenses</report>
-              <report>mailing-lists</report>
-              <report>modules</report>
-              <report>plugin-management</report>
-              <report>plugins</report>
-              <report>scm</report>
-              <report>summary</report>
-              <report>team</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-        <configuration>
-          <showAvatarImages>false</showAvatarImages>
-          <dependencyDetailsEnabled>true</dependencyDetailsEnabled>
-          <linkOnly>true</linkOnly>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <version>2.0.0</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>third-party-report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-        <configuration>
-          <includeOptional>true</includeOptional>
-          <sortByGroupIdAndArtifactId>true</sortByGroupIdAndArtifactId>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>versions-maven-plugin</artifactId>
-        <version>2.7</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>dependency-updates-report</report>
-              <report>plugin-updates-report</report>
-              <report>property-updates-report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-        <configuration>
-          <allowAnyUpdates>true</allowAnyUpdates>
-          <allowDowngrade>false</allowDowngrade>
-          <processDependencyManagementTransitive>false</processDependencyManagementTransitive>
-          <processPluginDependenciesInPluginManagement>false</processPluginDependenciesInPluginManagement>
-        </configuration>
       </plugin>
     </plugins>
   </reporting>
