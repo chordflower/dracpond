@@ -176,41 +176,30 @@
       <version>${auto-service-annotations.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.threeten</groupId>
-      <artifactId>threeten-extra</artifactId>
-      <version>${threeten-extra.version}</version>
-    </dependency>
-    <dependency>
       <groupId>io.vavr</groupId>
       <artifactId>vavr</artifactId>
       <version>${vavr.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>${guava.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>com.google.code.findbugs</groupId>
-          <artifactId>jsr305</artifactId>
-        </exclusion>
-        <exclusion>
-        	<groupId>org.checkerframework</groupId>
-        	<artifactId>checker-qual</artifactId>
-        </exclusion>
-      </exclusions>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>org.jetbrains</groupId>
       <artifactId>annotations</artifactId>
       <version>${annotations.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>javax.enterprise</groupId>
       <artifactId>cdi-api</artifactId>
       <version>${cdi-api.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <!-- Logging -->
@@ -218,6 +207,7 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${log4j.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
