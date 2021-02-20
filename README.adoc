@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fchordflower%2Fdracpond.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fchordflower%2Fdracpond?ref=badge_shield)
+
 = Dracpond
 
 https://www.codefactor.io/repository/github/chordflower/dracpond[image:https://www.codefactor.io/repository/github/chordflower/dracpond/badge[CodeFactor]]
@@ -41,3 +43,7 @@ Dracpond is written in Kotlin, and uses:
 * Vaadin for creating the web interface;
 * Various NIO.2 filesystem implementations for comunicating with FTP's, creating cyphered archives;
 * Maven as it's build system.
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fchordflower%2Fdracpond.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fchordflower%2Fdracpond?ref=badge_large)
